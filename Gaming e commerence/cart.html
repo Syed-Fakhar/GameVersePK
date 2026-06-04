@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | GameVerse PK</title>
+  <meta name="description" content="View items in your GameVerse PK shopping cart. Update quantities, apply promo codes, check shipping rates, and check out securely.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Custom modal styles overlay -->
+  <style>
+    /* Checkout Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .checkout-modal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      max-width: 550px;
+      width: 100%;
+      padding: 35px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+      position: relative;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.show .checkout-modal-card {
+      transform: translateY(0);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+    
+    .close-modal:hover {
+      color: #fff;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .form-control {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-sm);
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+      </a>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <form class="header-search" id="header-search-form">
+          <i class="fas fa-search"></i>
+          <input type="text" id="header-search-input" placeholder="Search gear...">
+        </form>
+        
+        <a href="cart.html" class="action-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </a>
+
+        <div class="action-btn" id="user-profile-btn" title="Account" onclick="showToast('Profile management coming soon!')">
+          <i class="fas fa-user"></i>
+        </div>
+
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Step progression progress tracker -->
+  <section class="section-padding" style="background-color: var(--bg-primary); padding-bottom: 20px;">
+    <div class="container">
+      <div class="cart-steps">
+        <div class="step-item active">
+          <span class="step-number">1</span>
+          <span>Shopping Cart</span>
+        </div>
+        <div class="step-item" id="step-checkout-indicator">
+          <span class="step-number">2</span>
+          <span>Checkout Details</span>
+        </div>
+        <div class="step-item" id="step-complete-indicator">
+          <span class="step-number">3</span>
+          <span>Order Complete</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Content Body -->
+  <section style="background-color: var(--bg-primary); padding-bottom: 80px; min-height: 450px;">
+    <div class="container">
+      
+      <!-- Empty Cart Fallback State -->
+      <div class="empty-cart-state" id="empty-cart-state" style="display: none;">
+        <i class="fas fa-shopping-basket"></i>
+        <h2>Your Shopping Cart is Empty</h2>
+        <p>You haven't added any gaming gear to your cart yet. Browse our hardware selections and assemble your gear!</p>
+        <a href="products.html" class="btn btn-primary">Browse Products</a>
+      </div>
+
+      <!-- Active Cart split panel layout -->
+      <div class="cart-page-wrapper" style="display: none;">
+        
+        <!-- Left Table panel -->
+        <main class="cart-table-container">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th style="width: 50%;">Product Details</th>
+                <th style="width: 15%;">Price</th>
+                <th style="width: 18%;">Quantity</th>
+                <th style="width: 12%;">Subtotal</th>
+                <th style="width: 5%;"></th>
+              </tr>
+            </thead>
+            <tbody id="cart-table-body">
+              <!-- Rendered via JavaScript -->
+            </tbody>
+          </table>
+        </main>
+
+        <!-- Right Summary panel -->
+        <aside class="cart-summary-card">
+          <h3 class="summary-title">Order Summary</h3>
+          
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">PKR 0</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="summary-shipping">PKR 0</span>
+          </div>
+          
+          <!-- Interactive shipping banner -->
+          <div id="shipping-banner-message" style="background: rgba(157, 78, 221, 0.05); border: 1px solid rgba(157, 78, 221, 0.1); border-radius: var(--border-radius-sm); padding: 12px; font-size: 0.8rem; margin: 15px 0; text-align: center;">
+            Add PKR 50,000 more to qualify for Free Shipping!
+          </div>
+
+          <div class="summary-row total-row">
+            <span>Total Sum</span>
+            <span id="summary-total">PKR 0</span>
+          </div>
+
+          <button class="btn btn-primary checkout-btn" id="checkout-proceed-btn">
+            Proceed to Checkout <i class="fas fa-credit-card" style="margin-left: 6px;"></i>
+          </button>
+          
+          <div style="text-align: center; margin-top: 16px;">
+            <a href="products.html" style="font-size: 0.9rem; color: var(--accent-blue); text-decoration: underline;">Continue Shopping</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulated Order Checkout Modal -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="checkout-modal-card">
+      <i class="fas fa-times close-modal" id="close-checkout-modal"></i>
+      
+      <!-- Checkout Form View -->
+      <form id="checkout-form">
+        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #fff; margin-bottom: 24px; border-left: 3px solid var(--accent-blue); padding-left: 10px;">Billing & Shipping</h3>
+        
+        <div class="form-group">
+          <label for="checkout-name">Full Name *</label>
+          <input type="text" id="checkout-name" class="form-control" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checkout-email">Email Address *</label>
+            <input type="email" id="checkout-email" class="form-control" placeholder="name@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="checkout-phone">Phone Number *</label>
+            <input type="tel" id="checkout-phone" class="form-control" placeholder="+92 3XX XXXXXXX" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="checkout-address">Shipping Address *</label>
+          <input type="text" id="checkout-address" class="form-control" placeholder="House/Apartment, Street Name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checkout-city">City *</label>
+            <select id="checkout-city" class="form-control" style="background-color: var(--bg-tertiary);" required>
+              <option value="Lahore">Lahore</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Rawalpindi">Rawalpindi</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Multan">Multan</option>
+              <option value="Peshawar">Peshawar</option>
+              <option value="Quetta">Quetta</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="checkout-payment">Payment Method *</label>
+            <select id="checkout-payment" class="form-control" style="background-color: var(--bg-tertiary);" required>
+              <option value="cod">Cash on Delivery (COD)</option>
+              <option value="bank">Direct Bank Transfer</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background: rgba(0, 210, 255, 0.03); border: 1px solid rgba(0, 210, 255, 0.1); border-radius: var(--border-radius-sm); padding: 12px; font-size: 0.8rem; margin: 20px 0; color: var(--text-muted);">
+          <i class="fas fa-info-circle" style="color: var(--accent-blue); margin-right: 6px;"></i> Delivery takes 2-4 working days across Pakistan. Payment will be collected in PKR.
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px;">Place Order (Simulated)</button>
+      </form>
+
+      <!-- Order Complete / Thank You view (swapped via JS) -->
+      <div id="checkout-thank-you" style="display: none; text-align: center;">
+        <i class="fas fa-check-circle" style="font-size: 4rem; color: #2ecc71; margin-bottom: 20px;"></i>
+        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 8px;">ORDER COMPLETED!</h3>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you for shopping at GameVerse PK, <span id="customer-name-display" style="color: #fff; font-weight: 600;">Valued Customer</span>!</p>
+        
+        <div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 30px; font-size: 0.95rem;">
+          <div style="margin-bottom: 8px; color: var(--text-muted);">Order ID Reference:</div>
+          <div id="order-id-display" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--accent-blue); letter-spacing: 1px;">GV-000000</div>
+          <div style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);">An email confirmation has been sent. We will call you shortly to confirm your delivery details.</div>
+        </div>
+
+        <button class="btn btn-primary" id="finish-order-btn" style="width: 100%;">Continue Shopping</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo">
+            <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+          </a>
+          <p class="footer-desc">
+            Pakistan's leading eCommerce portal for hardcore gamers, esports competitors, and workstation professionals.
+          </p>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.com" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=consoles">Consoles</a></li>
+            <li><a href="products.html?category=chairs">Gaming Chairs</a></li>
+            <li><a href="products.html?category=pcs">Gaming PCs</a></li>
+            <li><a href="products.html?category=monitors">Monitors</a></li>
+            <li><a href="products.html?category=accessories">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links" style="color: var(--text-muted); font-size: 0.95rem;">
+            <li style="margin-bottom: 12px;"><i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> Sector Y, DHA Phase 3, Lahore, Pakistan</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-phone-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> +92 300 1234567</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color: var(--accent-blue); margin-right: 8px;"></i> support@gameverse.pk</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-clock" style="color: var(--accent-blue); margin-right: 8px;"></i> Mon - Sat: 11:00 AM - 10:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 GameVerse PK. All Rights Reserved. Designed for Gamers.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript -->
+  <script src="js/products-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

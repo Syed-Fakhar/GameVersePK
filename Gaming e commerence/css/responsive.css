@@ -1,0 +1,188 @@
+/* GameVerse PK - Responsive Layout Styles */
+
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 70px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  /* Product catalog responsive adjustments */
+  .products-wrapper {
+    gap: 24px;
+  }
+
+  .filters-sidebar {
+    width: 250px;
+  }
+  
+  /* Details responsive adjustments */
+  .details-container {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Header navigation mobile collapsing structure */
+  .mobile-menu-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color: #0c0c12;
+    border-left: 1px solid var(--border-color);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 40px;
+    gap: 30px;
+    transition: var(--transition);
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    right: 0;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -7px);
+  }
+
+  /* Footer adjustments */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  /* Product details tabs */
+  .details-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-page-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Products List Sidebar */
+  .products-wrapper {
+    flex-direction: column;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+    position: static;
+    margin-bottom: 20px;
+  }
+
+  .header-search {
+    display: none; /* Hide top search bar on mobile, could offer simple toggle */
+  }
+
+  /* Cart Layout adjustments for Mobile */
+  .cart-table th:nth-child(3),
+  .cart-table td:nth-child(3),
+  .cart-table th:nth-child(4),
+  .cart-table td:nth-child(4) {
+    display: none; /* Hide price & subtotal headers and columns to fit mobile screen */
+  }
+
+  .cart-product-cell {
+    gap: 12px;
+  }
+
+  .cart-product-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-product-name {
+    font-size: 0.9rem;
+  }
+
+  .cart-table td {
+    padding: 16px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    justify-content: center;
+  }
+
+  .meta-title {
+    font-size: 1.6rem;
+  }
+
+  .meta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quantity-selector {
+    justify-content: center;
+  }
+
+  .reviews-summary {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .gallery-thumbs {
+    gap: 10px;
+  }
+
+  .cart-steps {
+    gap: 15px;
+  }
+
+  .step-item {
+    font-size: 0.95rem;
+  }
+
+  .step-number {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameVerse PK | Premium Gaming Store Pakistan</title>
+  <meta name="description" content="Welcome to GameVerse PK - Pakistan's ultimate destination for premium gaming consoles, chairs, custom gaming PCs, accessories, and high-refresh monitors. Get the best gear at the best PKR prices.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+      </a>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <form class="header-search" id="header-search-form">
+          <i class="fas fa-search"></i>
+          <input type="text" id="header-search-input" placeholder="Search gear...">
+        </form>
+        
+        <a href="cart.html" class="action-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </a>
+
+        <div class="action-btn" id="user-profile-btn" title="Account" onclick="showToast('Profile management coming soon!')">
+          <i class="fas fa-user"></i>
+        </div>
+
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" style="position: relative; height: calc(100vh - var(--header-height)); background: linear-gradient(rgba(8, 8, 12, 0.4), rgba(8, 8, 12, 0.9)), url('images/banners/hero.png') no-repeat center center/cover; display: flex; align-items: center;">
+    <div class="container" style="position: relative; z-index: 10;">
+      <div style="max-width: 650px;">
+        <span style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--accent-blue); letter-spacing: 2px; text-transform: uppercase; display: inline-block; margin-bottom: 12px; border-left: 3px solid var(--accent-blue); padding-left: 10px;">
+          NEXT-GEN GAMING IS HERE
+        </span>
+        <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; background: linear-gradient(135deg, #ffffff, #dcdcdc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          UNLEASH THE ULTIMATE EXPERIENCE
+        </h1>
+        <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 35px; line-height: 1.7;">
+          Upgrade your setup with Pakistan's premium gaming catalog. Explore high-performance consoles, custom PCs, professional ergonomic chairs, and blazing-fast accessories.
+        </p>
+        <div style="display: flex; gap: 20px;">
+          <a href="products.html" class="btn btn-primary">Shop Now <i class="fas fa-arrow-right"></i></a>
+          <a href="products.html?category=consoles" class="btn btn-secondary">Explore Consoles</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ambient bottom glowing bar -->
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-primary), transparent); pointer-events: none;"></div>
+  </section>
+
+  <!-- Featured Categories -->
+  <section class="section-padding" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Featured <span>Categories</span></h2>
+        <p class="section-subtitle">Browse through our curated gear collection tailored for gaming enthusiasts</p>
+      </div>
+
+      <!-- Categories Hex/Card Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+        <!-- Consoles -->
+        <a href="products.html?category=consoles" class="glow-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; text-transform: uppercase;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-blue); font-size: 1.8rem; transition: var(--transition);">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 8px;">Consoles</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">PlayStation, Xbox, Switch</span>
+        </a>
+
+        <!-- Chairs -->
+        <a href="products.html?category=chairs" class="glow-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; text-transform: uppercase;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(157, 78, 221, 0.1); border: 1px solid var(--accent-purple); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-purple); font-size: 1.8rem; transition: var(--transition);">
+            <i class="fas fa-chair"></i>
+          </div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 8px;">Gaming Chairs</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Secretlab, Razer, DXRacer</span>
+        </a>
+
+        <!-- PCs -->
+        <a href="products.html?category=pcs" class="glow-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; text-transform: uppercase;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-blue); font-size: 1.8rem; transition: var(--transition);">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 8px;">Gaming PCs</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Custom & pre-built rigs</span>
+        </a>
+
+        <!-- Monitors -->
+        <a href="products.html?category=monitors" class="glow-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; text-transform: uppercase;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(157, 78, 221, 0.1); border: 1px solid var(--accent-purple); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-purple); font-size: 1.8rem; transition: var(--transition);">
+            <i class="fas fa-tv"></i>
+          </div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 8px;">Monitors</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Ultra-wide, High FPS</span>
+        </a>
+
+        <!-- Accessories -->
+        <a href="products.html?category=accessories" class="glow-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; text-transform: uppercase;">
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent-blue); font-size: 1.8rem; transition: var(--transition);">
+            <i class="fas fa-keyboard"></i>
+          </div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 8px;">Accessories</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Mice, Keyboards, Audio</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Sellers -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Best <span>Sellers</span></h2>
+        <p class="section-subtitle">The most popular, highly-rated gaming hardware dominating the boards</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- PS5 -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-bestseller">Best Seller</span>
+            </div>
+            <a href="product-details.html?id=1" class="product-img">
+              <img src="images/products/playstation-5.jpg" alt="PlayStation 5 Console">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">consoles</span>
+            <a href="product-details.html?id=1" class="product-title-link">PlayStation 5 Console (Slim Edition)</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+              <span class="rating-count">(142)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 185,000</span>
+              <button class="product-add-cart" data-id="1" onclick="addToCart(1, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secretlab Titan Evo -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-bestseller">Best Seller</span>
+            </div>
+            <a href="product-details.html?id=6" class="product-img">
+              <img src="images/products/secretlab-titan.png" alt="Secretlab Titan Evo">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">chairs</span>
+            <a href="product-details.html?id=6" class="product-title-link">Secretlab Titan Evo (2024 Series)</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+              <span class="rating-count">(112)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 145,000</span>
+              <button class="product-add-cart" data-id="6" onclick="addToCart(6, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SteelSeries Apex Pro -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-bestseller">Best Seller</span>
+            </div>
+            <a href="product-details.html?id=14" class="product-img">
+              <img src="images/products/steelseries-keyboard.jpg" alt="SteelSeries Apex Pro">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">accessories</span>
+            <a href="product-details.html?id=14" class="product-title-link">SteelSeries Apex Pro Mechanical Keyboard</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+              <span class="rating-count">(77)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 52,000</span>
+              <button class="product-add-cart" data-id="14" onclick="addToCart(14, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid banner / Call to action -->
+  <section style="background: linear-gradient(rgba(15,15,21,0.85), rgba(15,15,21,0.85)), url('images/banners/section-bg.jpg') no-repeat center center/cover; padding: 100px 0; text-align: center; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <h2 style="font-family: var(--font-heading); font-size: 3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: 2px;">BUILD YOUR DREAM BATTLESTATION</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 35px auto; font-size: 1.1rem;">
+        Get in touch with our tech assembly team for custom-watercooled desktop PCs, tailored specs configurations, and free gaming hardware consultations.
+      </p>
+      <a href="contact.html" class="btn btn-primary">Get in Touch <i class="fas fa-headset"></i></a>
+    </div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">New <span>Arrivals</span></h2>
+        <p class="section-subtitle">Gear up with the freshest arrivals in the international gaming scene</p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Nintendo Switch OLED -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-new">New</span>
+            </div>
+            <a href="product-details.html?id=3" class="product-img">
+              <img src="images/products/nintendo-switch.jpg" alt="Nintendo Switch OLED">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">consoles</span>
+            <a href="product-details.html?id=3" class="product-title-link">Nintendo Switch OLED Model</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+              <span class="rating-count">(84)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 95,000</span>
+              <button class="product-add-cart" data-id="3" onclick="addToCart(3, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Razer Enki -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-new">New</span>
+            </div>
+            <a href="product-details.html?id=5" class="product-img">
+              <img src="images/products/razer-enki.png" alt="Razer Enki Chair">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">chairs</span>
+            <a href="product-details.html?id=5" class="product-title-link">Razer Enki Premium Gaming Chair</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+              <span class="rating-count">(39)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 115,000</span>
+              <button class="product-add-cart" data-id="5" onclick="addToCart(5, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GameVerse Ares PC -->
+        <div class="product-card">
+          <div class="product-img-wrapper">
+            <div class="product-badges">
+              <span class="badge badge-new">New</span>
+            </div>
+            <a href="product-details.html?id=7" class="product-img">
+              <img src="images/products/ares-i7-pc.jpg" alt="GameVerse Ares PC">
+            </a>
+          </div>
+          <div class="product-info">
+            <span class="product-category">pcs</span>
+            <a href="product-details.html?id=7" class="product-title-link">GameVerse Ares I7 Gaming PC</a>
+            <div class="product-rating">
+              <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+              <span class="rating-count">(27)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">PKR 395,000</span>
+              <button class="product-add-cart" data-id="7" onclick="addToCart(7, 1)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section-padding" style="background-color: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Gamer <span>Testimonials</span></h2>
+        <p class="section-subtitle">Read feedback from our loyal customers in the Pakistani gaming community</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+        <!-- Testimonial 1 -->
+        <div class="glow-card" style="padding: 30px; display: flex; flex-direction: column;">
+          <div class="stars" style="margin-bottom: 16px; font-size: 1rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="color: var(--text-muted); font-style: italic; margin-bottom: 24px; flex-grow: 1;">
+            "Bought my PS5 and DualSense Edge from GameVerse PK. Absolutely genuine product with official seal. Shipping to Lahore took only 24 hours. The neon packing was super cool!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #2a2a35; border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: var(--font-heading); color: var(--accent-blue);">
+              ZH
+            </div>
+            <div>
+              <h4 style="font-size: 1rem; color: #fff;">Zain Hashmi</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Competitive Gamer, Lahore</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="glow-card" style="padding: 30px; display: flex; flex-direction: column;">
+          <div class="stars" style="margin-bottom: 16px; font-size: 1rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="color: var(--text-muted); font-style: italic; margin-bottom: 24px; flex-grow: 1;">
+            "Their customer support is next level. They guided me through custom PC assembly component selection. Chronos RTX 4090 rig runs absolutely like a beast! Highly recommended."
+          </p>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #2a2a35; border: 1px solid var(--accent-purple); display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: var(--font-heading); color: var(--accent-purple);">
+              AK
+            </div>
+            <div>
+              <h4 style="font-size: 1rem; color: #fff;">Asma Khan</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3D Animator / Streamer, Karachi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="glow-card" style="padding: 30px; display: flex; flex-direction: column;">
+          <div class="stars" style="margin-bottom: 16px; font-size: 1rem;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p style="color: var(--text-muted); font-style: italic; margin-bottom: 24px; flex-grow: 1;">
+            "Superb shopping experience. I ordered the Secretlab Titan Evo chair. Legit quality, extremely ergonomic, and pricing is quite competitive compared to local open market retailers."
+          </p>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #2a2a35; border: 1px solid var(--accent-blue); display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: var(--font-heading); color: var(--accent-blue);">
+              FR
+            </div>
+            <div>
+              <h4 style="font-size: 1rem; color: #fff;">Faisal Rehman</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Software Developer, Islamabad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="section-padding" style="background: linear-gradient(135deg, var(--bg-primary), #110826);">
+    <div class="container" style="max-width: 750px; text-align: center;">
+      <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 20px;"></i>
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 12px; font-weight: 800;">JOIN THE ELITE SQUAD</h2>
+      <p style="color: var(--text-muted); margin-bottom: 30px;">
+        Subscribe to receive notification of flash sales, hardware restocking updates, custom build recommendations, and exclusive community discounts in Pakistan.
+      </p>
+      
+      <form class="newsletter-form" id="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer Component -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo">
+            <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+          </a>
+          <p class="footer-desc">
+            Pakistan's leading eCommerce portal for hardcore gamers, esports competitors, and workstation professionals.
+          </p>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.com" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=consoles">Consoles</a></li>
+            <li><a href="products.html?category=chairs">Gaming Chairs</a></li>
+            <li><a href="products.html?category=pcs">Gaming PCs</a></li>
+            <li><a href="products.html?category=monitors">Monitors</a></li>
+            <li><a href="products.html?category=accessories">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links" style="color: var(--text-muted); font-size: 0.95rem;">
+            <li style="margin-bottom: 12px;"><i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> Sector Y, DHA Phase 3, Lahore, Pakistan</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-phone-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> +92 300 1234567</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color: var(--accent-blue); margin-right: 8px;"></i> support@gameverse.pk</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-clock" style="color: var(--accent-blue); margin-right: 8px;"></i> Mon - Sat: 11:00 AM - 10:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 GameVerse PK. All Rights Reserved. Designed for Gamers.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript -->
+  <script src="js/products-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

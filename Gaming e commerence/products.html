@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Catalog | GameVerse PK</title>
+  <meta name="description" content="Explore the GameVerse PK product catalog. Filter and sort through our premium gaming consoles, ergonomic chairs, custom desktops, and accessories. Fast delivery in Pakistan.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+      </a>
+      
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link active">Products</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <form class="header-search" id="header-search-form">
+          <i class="fas fa-search"></i>
+          <input type="text" id="header-search-input" placeholder="Search gear...">
+        </form>
+        
+        <a href="cart.html" class="action-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </a>
+
+        <div class="action-btn" id="user-profile-btn" title="Account" onclick="showToast('Profile management coming soon!')">
+          <i class="fas fa-user"></i>
+        </div>
+
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner/Header breadcrumbs -->
+  <section style="background: linear-gradient(rgba(8, 8, 12, 0.7), rgba(8, 8, 12, 0.9)), url('images/banners/section-bg.jpg') no-repeat center center/cover; padding: 40px 0; border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+      <div>
+        <h1 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 5px;">Gaming Catalog</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          <a href="index.html" style="color: var(--accent-blue);">Home</a> / Products
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Catalog Content -->
+  <section class="section-padding" style="background-color: var(--bg-primary);">
+    <div class="container">
+      
+      <!-- Live Search Query Label -->
+      <h2 id="results-indicator" style="display: none; font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 24px; color: #fff; border-left: 3px solid var(--accent-purple); padding-left: 12px; text-transform: uppercase;">
+        Search results
+      </h2>
+
+      <div class="products-wrapper">
+        
+        <!-- Left Filter Sidebar -->
+        <aside class="filters-sidebar">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.1rem; color: #fff;"><i class="fas fa-filter" style="margin-right: 8px; color: var(--accent-blue);"></i> Filters</h3>
+            <a href="#" id="clear-filters" style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Clear All</a>
+          </div>
+
+          <!-- Category widget -->
+          <div class="filter-widget">
+            <h4 class="filter-title">Categories</h4>
+            <div class="checkbox-list">
+              <label class="checkbox-item">
+                <input type="checkbox" class="category-cb" value="consoles">
+                Consoles
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" class="category-cb" value="chairs">
+                Gaming Chairs
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" class="category-cb" value="pcs">
+                Gaming PCs
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" class="category-cb" value="monitors">
+                Monitors
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" class="category-cb" value="accessories">
+                Accessories
+              </label>
+            </div>
+          </div>
+
+          <!-- Price widget -->
+          <div class="filter-widget">
+            <h4 class="filter-title">Max Price</h4>
+            <div class="price-range-wrapper">
+              <input type="range" class="range-slider" id="price-slider" min="15000" max="1000000" step="5000" value="1000000">
+              <div class="price-range-inputs">
+                <div class="price-input-box" style="width: 100%;">
+                  <span>Maximum Price Limit</span>
+                  <strong id="price-slider-display" style="color: var(--accent-blue); font-size: 1rem; font-family: var(--font-heading);">PKR 1,000,000</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery info badge -->
+          <div style="background: rgba(0, 210, 255, 0.03); border: 1px solid rgba(0, 210, 255, 0.1); border-radius: var(--border-radius-sm); padding: 16px; margin-top: 30px; text-align: center;">
+            <i class="fas fa-truck-moving" style="font-size: 1.5rem; color: var(--accent-blue); margin-bottom: 10px;"></i>
+            <h5 style="font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 4px; color: #fff;">FREE SHIPPING</h5>
+            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">On all orders exceeding PKR 50,000 inside Pakistan.</p>
+          </div>
+        </aside>
+
+        <!-- Right Products Catalog Grid -->
+        <main class="products-main">
+          
+          <!-- Catalog sorting & counts header bar -->
+          <div class="products-header">
+            <div class="products-count">
+              Showing <span id="total-products-count">0</span> products
+            </div>
+            
+            <div class="products-sorting">
+              <label for="sort-by">Sort By:</label>
+              <select class="sort-select" id="sort-by">
+                <option value="bestselling">Best Selling</option>
+                <option value="low-high">Price: Low to High</option>
+                <option value="high-low">Price: High to Low</option>
+                <option value="newest">Newest Arrivals</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Products Grid -->
+          <div class="product-grid" id="products-grid-container">
+            <!-- Populated via Javascript -->
+          </div>
+
+          <!-- Load More Trigger Button -->
+          <div class="pagination-container">
+            <button class="btn btn-dark" id="load-more-btn" style="display: none;">
+              Load More <i class="fas fa-sync-alt" style="margin-left: 6px;"></i>
+            </button>
+          </div>
+
+        </main>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="footer-logo">
+            <i class="fas fa-gamepad"></i> GameVerse<span>PK</span>
+          </a>
+          <p class="footer-desc">
+            Pakistan's leading eCommerce portal for hardcore gamers, esports competitors, and workstation professionals.
+          </p>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.com" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Categories</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=consoles">Consoles</a></li>
+            <li><a href="products.html?category=chairs">Gaming Chairs</a></li>
+            <li><a href="products.html?category=pcs">Gaming PCs</a></li>
+            <li><a href="products.html?category=monitors">Monitors</a></li>
+            <li><a href="products.html?category=accessories">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links" style="color: var(--text-muted); font-size: 0.95rem;">
+            <li style="margin-bottom: 12px;"><i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> Sector Y, DHA Phase 3, Lahore, Pakistan</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-phone-alt" style="color: var(--accent-blue); margin-right: 8px;"></i> +92 300 1234567</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color: var(--accent-blue); margin-right: 8px;"></i> support@gameverse.pk</li>
+            <li style="margin-bottom: 12px;"><i class="fas fa-clock" style="color: var(--accent-blue); margin-right: 8px;"></i> Mon - Sat: 11:00 AM - 10:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 GameVerse PK. All Rights Reserved. Designed for Gamers.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript -->
+  <script src="js/products-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>
